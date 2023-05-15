@@ -1,14 +1,16 @@
 class Polynomial
 {
-    double[] coefficients = new double[100];
+    public double[] coefficients;
     public Polynomial()
     {
+        coefficients = new double[1];
         coefficients[0] = 0;
     }
 
 
     public Polynomial(double[] new_coeff)
     {
+        coefficients = new double[new_coeff.length]; 
         for(int i = 0; i < new_coeff.length; i++)
         {
             coefficients[i] = new_coeff[i];
@@ -18,19 +20,24 @@ class Polynomial
 
     public Polynomial add(Polynomial poly)
     {
-        Polynomial new_poly = new Polynomial();
-
-        for(int i = 0; i < poly.coefficients.length; i++)
+        if(poly.coefficients.length > coefficients.length)
         {
-            new_poly.coefficients[i] += poly.coefficients[i];
+            Polynomial new_poly = new Polynomial(poly.coefficients);
+            for(int i = 0; i < coefficients.length; i++)
+            {
+                new_poly.coefficients[i] += coefficients[i];
+            }
+            return new_poly;
         }
 
+        Polynomial new_poly = new Polynomial(coefficients);
         for(int i = 0; i < poly.coefficients.length; i++)
         {
             new_poly.coefficients[i] += coefficients[i];
-        }   
-    
+        }
+        
         return new_poly;
+
     }
 
 
